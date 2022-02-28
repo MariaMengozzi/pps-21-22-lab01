@@ -1,7 +1,5 @@
 import lab01.example.model.AccountHolder;
-import lab01.example.model.AccountHolderGold;
-import lab01.example.model.SimpleBankAccount;
-import lab01.example.model.SimpleBankAccountGoldHolder;
+import lab01.example.model.SimpleBankAccountGold;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,8 +12,8 @@ class SimpleBankAccountGoldUserTest extends AbstractSimpleBankAccountTest{
 
     @BeforeEach
     void beforeEach(){
-        accountHolder = new AccountHolderGold("Mario", "Rossi", 1);
-        bankAccount = new SimpleBankAccountGoldHolder(accountHolder, 0);
+        accountHolder = new AccountHolder("Mario", "Rossi", 1);
+        bankAccount = new SimpleBankAccountGold(accountHolder, 0);
     }
 
     @Test

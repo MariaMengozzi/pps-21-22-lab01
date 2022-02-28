@@ -16,4 +16,11 @@ class SimpleBankAccountTest extends AbstractSimpleBankAccountTest{
         bankAccount = new SimpleBankAccount(accountHolder, 0);
     }
 
+    @Test
+    void testNoRedBalance(){
+        bankAccount.deposit(accountHolder.getId(), 100);
+        bankAccount.withdraw(accountHolder.getId(), 110);
+        assertEquals(100, bankAccount.getBalance());
+    }
+
 }
