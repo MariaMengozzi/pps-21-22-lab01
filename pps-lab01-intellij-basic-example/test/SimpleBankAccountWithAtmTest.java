@@ -6,17 +6,22 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * The test suite for testing the SimpleBankAccount with ATM implementation
  */
 class SimpleBankAccountWithAtmTest extends AbstractSimpleBankAccountTest{
 
-    private static final int FEE = 1;
-
     @BeforeEach
     void beforeEach(){
         accountHolder = new AccountHolder("Mario", "Rossi", 1);
         bankAccount = new SimpleBankAccountWithAtm(accountHolder, 0);
+    }
+
+    @Test
+    void testWithdrawExceprion() {
+        super.testWithdraw();
+        assertThrows(ArithmeticException.class, ()->bankAccount.withdraw(accountHolder.getId(), 200));
     }
 }

@@ -22,9 +22,19 @@ public class SimpleBankAccountWithAtm extends SimpleBankAccount implements BankA
 
     @Override
     public void withdrawWithATM(final int userID, final double amount) {
+        if (!isWithdrawAllowed(amount)){
+            throw new ArithmeticException();
+        }
         if (checkUser(userID) && isWithdrawAllowed(amount)) {
             this.balance = this.balance - amount - FEE;
         }
     }
 
+    @Override
+    public void withdraw(int userID, double amount) {
+        if (!isWithdrawAllowed(amount)){
+            throw new ArithmeticException();
+        }
+        super.withdraw(userID, amount);
+    }
 }
