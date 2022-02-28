@@ -31,6 +31,7 @@ public class SimpleBankAccountWithAtm implements BankAccountATM {
             this.balance += amount;
         }
     }
+
     @Override
     public void depositWithATM(final int userID, final double amount){
         if (checkUser(userID)) {
