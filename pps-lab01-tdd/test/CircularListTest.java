@@ -87,7 +87,7 @@ public class CircularListTest {
 
     @Test
     public void testPreviousMoreElementInList(){
-        List<Integer> expectedResult = new ArrayList<>(Arrays.asList(5, 15, 10, 5));
+        List<Integer> expectedResult = new ArrayList<>(Arrays.asList(15,10,5,15));
         List<Integer> result = new ArrayList<>();
         this.addElements();
         for (Integer element: expectedResult) {
@@ -98,7 +98,7 @@ public class CircularListTest {
 
     @Test
     public void testNextAndPrevious(){
-        List<Integer> expectedResult = new ArrayList<>(Arrays.asList(5,10,5,10));
+        List<Integer> expectedResult = new ArrayList<>(Arrays.asList(5,5,5,10));
         List<Integer> result = new ArrayList<>();
         this.addElements();
         result.add(this.circularList.next().get());
