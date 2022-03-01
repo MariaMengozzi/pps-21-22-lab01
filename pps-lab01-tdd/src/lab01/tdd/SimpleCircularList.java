@@ -16,7 +16,6 @@ public class SimpleCircularList implements CircularList {
         index = 0;
     }
 
-
     @Override
     public void add(int element) {
         this.list.add(element);
@@ -61,6 +60,11 @@ public class SimpleCircularList implements CircularList {
 
     @Override
     public Optional<Integer> next(SelectStrategy strategy) {
-        return Optional.empty();
+        Optional<Integer> element = this.next();
+        if (isEmpty() || element.isEmpty() || !strategy.apply(element.get())){
+            return Optional.empty();
+        } else {
+            return element;
+        }
     }
 }
