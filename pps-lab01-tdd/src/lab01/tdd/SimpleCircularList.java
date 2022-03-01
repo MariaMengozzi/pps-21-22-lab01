@@ -45,7 +45,13 @@ public class SimpleCircularList implements CircularList {
 
     @Override
     public Optional<Integer> previous() {
-        return Optional.empty();
+        if (this.isEmpty()) {
+            return Optional.empty();
+        } else {
+            int element = list.get(index);
+            index = index == 0 ? this.list.size()-1 : index-1;
+            return Optional.of(element);
+        }
     }
 
     @Override

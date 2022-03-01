@@ -75,6 +75,33 @@ public class CircularListTest {
         assertEquals(5, this.circularList.next().get());
     }
 
-    
+    @Test
+    public void testPreviousEmptyList(){
+        assertEquals(Optional.empty(), this.circularList.previous());
+    }
+
+    @Test
+    public void testPreviousOneElementInList(){
+        List<Integer> expectedResult = new ArrayList<>(Arrays.asList(5,5,5));
+        List<Integer> result = new ArrayList<>();
+        this.circularList.add(5);
+        for (int i=0; i<3; i++){
+            result.add(this.circularList.previous().get());
+        }
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void testPreviousMoreElementInList(){
+        List<Integer> expectedResult = new ArrayList<>(Arrays.asList(5,15,10,5));
+        List<Integer> result = new ArrayList<>();
+        for (int i = expectedResult.size()-1; i > 0; i--) {
+            this.circularList.add(expectedResult.get(i));
+        }
+        for (Integer element: expectedResult) {
+            result.add(this.circularList.previous().get());
+        }
+        assertEquals(expectedResult, result);
+    }
 
 }
