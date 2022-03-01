@@ -1,7 +1,4 @@
-import lab01.tdd.CircularList;
-import lab01.tdd.EvenStrategy;
-import lab01.tdd.MultipleOfStrategy;
-import lab01.tdd.SimpleCircularList;
+import lab01.tdd.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -131,6 +128,18 @@ public class CircularListTest {
         this.circularList.add(4);
         for (Optional element: expectedResult) {
             result.add(this.circularList.next(new MultipleOfStrategy(5)));
+        }
+
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void testNextEqualsStrategy(){
+        List<Optional<Integer>> expectedResult = new ArrayList<>(Arrays.asList(Optional.of(5),Optional.empty(),Optional.empty(), Optional.of(5)));
+        List<Optional<Integer>> result = new ArrayList<>();
+        this.addElements();
+        for (Optional element: expectedResult) {
+            result.add(this.circularList.next(new EqualsStrategy(5)));
         }
 
         assertEquals(expectedResult, result);
