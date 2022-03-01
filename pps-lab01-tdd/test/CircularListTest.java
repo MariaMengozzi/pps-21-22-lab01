@@ -65,4 +65,16 @@ public class CircularListTest {
         assertEquals(expectedResult, result);
     }
 
+    @Test
+    public void testReset(){
+        this.circularList.add(5);
+        this.circularList.add(10);
+        this.circularList.add(15);
+        this.circularList.next();
+        this.circularList.reset();
+        assertEquals(5, this.circularList.next().get());
+    }
+
+    
+
 }
