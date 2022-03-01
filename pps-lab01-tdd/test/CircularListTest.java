@@ -1,12 +1,10 @@
 import lab01.tdd.CircularList;
 import lab01.tdd.EvenStrategy;
-import lab01.tdd.MultOfStrategy;
+import lab01.tdd.MultipleOfStrategy;
 import lab01.tdd.SimpleCircularList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import javax.swing.text.html.Option;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -132,7 +130,7 @@ public class CircularListTest {
         this.addElements();
         this.circularList.add(4);
         for (Optional element: expectedResult) {
-            result.add(this.circularList.next(new MultOfStrategy(5)));
+            result.add(this.circularList.next(new MultipleOfStrategy(5)));
         }
 
         assertEquals(expectedResult, result);

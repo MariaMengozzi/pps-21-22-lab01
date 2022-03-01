@@ -1,9 +1,9 @@
 package lab01.tdd;
 
-public class MultOfStrategy implements SelectStrategy {
+public class MultipleOfStrategy implements SelectStrategy {
     private final int number;
 
-    public MultOfStrategy(int number) {
+    public MultipleOfStrategy(int number) {
         this.number = number;
     }
 
