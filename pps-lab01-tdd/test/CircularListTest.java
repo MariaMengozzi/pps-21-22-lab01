@@ -36,12 +36,10 @@ public class CircularListTest {
 
     @Test
     public void testNextOneElementInList(){
-        List<Integer> expectedResult = new ArrayList<>(Arrays.asList(5,5,5));
-        List<Integer> result = new ArrayList<>();
+        List<Optional<Integer>> expectedResult = new ArrayList<>(Arrays.asList(Optional.of(5), Optional.of(5), Optional.of(5)));
+        List<Optional<Integer>> result = new ArrayList<>();
         this.circularList.add(5);
-        for (int i=0; i<3; i++){
-            result.add(this.circularList.next().get());
-        }
+        expectedResult.forEach(e -> result.add(this.circularList.next()));
         assertEquals(expectedResult, result);
     }
 
@@ -52,12 +50,10 @@ public class CircularListTest {
 
     @Test
     public void testNextMoreElementInList(){
-        List<Integer> expectedResult = new ArrayList<>(Arrays.asList(5,10,15,5));
-        List<Integer> result = new ArrayList<>();
+        List<Optional<Integer>> expectedResult = new ArrayList<>(Arrays.asList(Optional.of(5), Optional.of(10), Optional.of(15), Optional.of(5)));
+        List<Optional<Integer>> result = new ArrayList<>();
         this.addElements();
-        for (Integer element: expectedResult) {
-            result.add(this.circularList.next().get());
-        }
+        expectedResult.forEach(e -> result.add(this.circularList.next()));
         assertEquals(expectedResult, result);
     }
 
@@ -66,7 +62,7 @@ public class CircularListTest {
         this.addElements();
         this.circularList.next();
         this.circularList.reset();
-        assertEquals(5, this.circularList.next().get());
+        assertEquals(Optional.of(5), this.circularList.next());
     }
 
     @Test
@@ -76,35 +72,31 @@ public class CircularListTest {
 
     @Test
     public void testPreviousOneElementInList(){
-        List<Integer> expectedResult = new ArrayList<>(Arrays.asList(5,5,5));
-        List<Integer> result = new ArrayList<>();
+        List<Optional<Integer>> expectedResult = new ArrayList<>(Arrays.asList(Optional.of(5), Optional.of(5), Optional.of(5)));
+        List<Optional<Integer>> result = new ArrayList<>();
         this.circularList.add(5);
-        for (Integer element :expectedResult){
-            result.add(this.circularList.previous().get());
-        }
+        expectedResult.forEach(x -> result.add(this.circularList.previous()));
         assertEquals(expectedResult, result);
     }
 
     @Test
     public void testPreviousMoreElementInList(){
-        List<Integer> expectedResult = new ArrayList<>(Arrays.asList(15,10,5,15));
-        List<Integer> result = new ArrayList<>();
+        List<Optional<Integer>> expectedResult = new ArrayList<>(Arrays.asList(Optional.of(15), Optional.of(10), Optional.of(5), Optional.of(15)));
+        List<Optional<Integer>> result = new ArrayList<>();
         this.addElements();
-        for (Integer element: expectedResult) {
-            result.add(this.circularList.previous().get());
-        }
+        expectedResult.forEach(x-> result.add(this.circularList.previous()));
         assertEquals(expectedResult, result);
     }
 
     @Test
     public void testNextAndPrevious(){
-        List<Integer> expectedResult = new ArrayList<>(Arrays.asList(5,5,5,10));
-        List<Integer> result = new ArrayList<>();
+        List<Optional<Integer>> expectedResult = new ArrayList<>(Arrays.asList(Optional.of(5), Optional.of(5), Optional.of(5), Optional.of(10)));
+        List<Optional<Integer>> result = new ArrayList<>();
         this.addElements();
-        result.add(this.circularList.next().get());
-        result.add(this.circularList.previous().get());
-        result.add(this.circularList.next().get());
-        result.add(this.circularList.next().get());
+        result.add(this.circularList.next());
+        result.add(this.circularList.previous());
+        result.add(this.circularList.next());
+        result.add(this.circularList.next());
         assertEquals(expectedResult, result);
     }
 
@@ -114,23 +106,17 @@ public class CircularListTest {
         List<Optional<Integer>> expectedResult = new ArrayList<>(Arrays.asList(Optional.empty(),Optional.of(10),Optional.empty(), Optional.empty()));
         List<Optional<Integer>> result = new ArrayList<>();
         this.addElements();
-        for (Optional element: expectedResult) {
-            result.add(this.circularList.next(new EvenStrategy()));
-        }
-
+        expectedResult.forEach(x -> result.add(this.circularList.next(new EvenStrategy())));
         assertEquals(expectedResult, result);
     }
 
     @Test
-    public void testNextMultStrategy(){
+    public void testNextMultipleOfStrategy(){
         List<Optional<Integer>> expectedResult = new ArrayList<>(Arrays.asList(Optional.of(5),Optional.of(10),Optional.of(15), Optional.empty()));
         List<Optional<Integer>> result = new ArrayList<>();
         this.addElements();
         this.circularList.add(4);
-        for (Optional element: expectedResult) {
-            result.add(this.circularList.next(new MultipleOfStrategy(5)));
-        }
-
+        expectedResult.forEach(x -> result.add(this.circularList.next(new MultipleOfStrategy(5))));
         assertEquals(expectedResult, result);
     }
 
@@ -139,10 +125,7 @@ public class CircularListTest {
         List<Optional<Integer>> expectedResult = new ArrayList<>(Arrays.asList(Optional.of(5),Optional.empty(),Optional.empty(), Optional.of(5)));
         List<Optional<Integer>> result = new ArrayList<>();
         this.addElements();
-        for (Optional element: expectedResult) {
-            result.add(this.circularList.next(new EqualsStrategy(5)));
-        }
-
+        expectedResult.forEach(x -> result.add(this.circularList.next(new EqualsStrategy(5))));
         assertEquals(expectedResult, result);
     }
 
@@ -153,9 +136,7 @@ public class CircularListTest {
         List<Optional<Integer>> result = new ArrayList<>();
         AbstractFactory strategyFactory = new Strategies();
         this.addElements();
-        for (Optional element: expectedResult) {
-            result.add(this.circularList.next(strategyFactory.getStrategy(StrategyTypes.EVEN_STRATEGY, null)));
-        }
+        expectedResult.forEach(x-> result.add(this.circularList.next(strategyFactory.getStrategy(StrategyTypes.EVEN_STRATEGY, null))));
         assertEquals(expectedResult, result);
     }
 
@@ -166,9 +147,7 @@ public class CircularListTest {
         AbstractFactory strategyFactory = new Strategies();
         this.addElements();
         this.circularList.add(4);
-        for (Optional element: expectedResult) {
-            result.add(this.circularList.next(strategyFactory.getStrategy(StrategyTypes.MULTIPLE_OF_STRATEGY, 5)));
-        }
+        expectedResult.forEach(x-> result.add(this.circularList.next(strategyFactory.getStrategy(StrategyTypes.MULTIPLE_OF_STRATEGY, 5))));
         assertEquals(expectedResult, result);
     }
 
@@ -178,10 +157,7 @@ public class CircularListTest {
         List<Optional<Integer>> result = new ArrayList<>();
         AbstractFactory strategyFactory = new Strategies();
         this.addElements();
-        for (Optional element: expectedResult) {
-            result.add(this.circularList.next(strategyFactory.getStrategy(StrategyTypes.EQUAL_STRATEGY, 5)));
-        }
-
+        expectedResult.forEach(x-> result.add(this.circularList.next(strategyFactory.getStrategy(StrategyTypes.EQUAL_STRATEGY, 5))));
         assertEquals(expectedResult, result);
     }
 
