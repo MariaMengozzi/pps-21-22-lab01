@@ -60,11 +60,11 @@ public class SimpleCircularList implements CircularList {
 
     @Override
     public Optional<Integer> next(SelectStrategy strategy) {
+        int currentindex = index;
         Optional<Integer> element = this.next();
-        if (isEmpty() || element.isEmpty() || !strategy.apply(element.get())){
-            return Optional.empty();
-        } else {
-            return element;
+        while(index != currentindex && !strategy.apply(element.get())){
+            element = this.next();
         }
+        return element;
     }
 }

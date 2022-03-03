@@ -1,6 +1,6 @@
 package lab01.tdd;
 
-public class Strategies extends AbstractFactory {
+public class Strategies implements AbstractFactory {
 
     @Override
     public SelectStrategy getStrategy(StrategyTypes strategyType, Integer number) {

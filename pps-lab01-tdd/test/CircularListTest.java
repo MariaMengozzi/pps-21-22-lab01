@@ -103,7 +103,7 @@ public class CircularListTest {
     //Strategy pattern tests
     @Test
     public void testNextEvenStrategy(){
-        List<Optional<Integer>> expectedResult = new ArrayList<>(Arrays.asList(Optional.empty(),Optional.of(10),Optional.empty(), Optional.empty()));
+        List<Optional<Integer>> expectedResult = new ArrayList<>(Arrays.asList(Optional.of(10)));
         List<Optional<Integer>> result = new ArrayList<>();
         this.addElements();
         expectedResult.forEach(x -> result.add(this.circularList.next(new EvenStrategy())));
@@ -112,7 +112,7 @@ public class CircularListTest {
 
     @Test
     public void testNextMultipleOfStrategy(){
-        List<Optional<Integer>> expectedResult = new ArrayList<>(Arrays.asList(Optional.of(5),Optional.of(10),Optional.of(15), Optional.empty()));
+        List<Optional<Integer>> expectedResult = new ArrayList<>(Arrays.asList(Optional.of(5),Optional.of(10),Optional.of(15)));
         List<Optional<Integer>> result = new ArrayList<>();
         this.addElements();
         this.circularList.add(4);
@@ -122,7 +122,7 @@ public class CircularListTest {
 
     @Test
     public void testNextEqualsStrategy(){
-        List<Optional<Integer>> expectedResult = new ArrayList<>(Arrays.asList(Optional.of(5),Optional.empty(),Optional.empty(), Optional.of(5)));
+        List<Optional<Integer>> expectedResult = new ArrayList<>(Arrays.asList(Optional.of(5), Optional.of(5)));
         List<Optional<Integer>> result = new ArrayList<>();
         this.addElements();
         expectedResult.forEach(x -> result.add(this.circularList.next(new EqualsStrategy(5))));
@@ -132,7 +132,7 @@ public class CircularListTest {
     //abstract factory pattern tests
     @Test
     public void testNextEvenStrategyWithAbstractFactory(){
-        List<Optional<Integer>> expectedResult = new ArrayList<>(Arrays.asList(Optional.empty(),Optional.of(10),Optional.empty(), Optional.empty()));
+        List<Optional<Integer>> expectedResult = new ArrayList<>(Arrays.asList(Optional.of(10)));
         List<Optional<Integer>> result = new ArrayList<>();
         AbstractFactory strategyFactory = new Strategies();
         this.addElements();
@@ -142,7 +142,7 @@ public class CircularListTest {
 
     @Test
     public void testNextMultipleOfStrategyWithAbstractFactory(){
-        List<Optional<Integer>> expectedResult = new ArrayList<>(Arrays.asList(Optional.of(5),Optional.of(10),Optional.of(15), Optional.empty()));
+        List<Optional<Integer>> expectedResult = new ArrayList<>(Arrays.asList(Optional.of(5),Optional.of(10),Optional.of(15)));
         List<Optional<Integer>> result = new ArrayList<>();
         AbstractFactory strategyFactory = new Strategies();
         this.addElements();
@@ -153,7 +153,7 @@ public class CircularListTest {
 
     @Test
     public void testNextEqualsStrategyWithAbstractFactory(){
-        List<Optional<Integer>> expectedResult = new ArrayList<>(Arrays.asList(Optional.of(5),Optional.empty(),Optional.empty(), Optional.of(5)));
+        List<Optional<Integer>> expectedResult = new ArrayList<>(Arrays.asList(Optional.of(5), Optional.of(5)));
         List<Optional<Integer>> result = new ArrayList<>();
         AbstractFactory strategyFactory = new Strategies();
         this.addElements();
